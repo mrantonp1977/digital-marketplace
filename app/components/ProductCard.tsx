@@ -8,6 +8,7 @@ import {
 } from '@/components/ui/carousel';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
+import { Skeleton } from '@/components/ui/skeleton';
 
 interface ProductCardProps {
   images: string[];
@@ -58,4 +59,18 @@ export function ProductCard({
       </Button>
     </div>
   );
+}
+
+
+export function LoadingProductCard() {
+  return (
+    <div className="flex flex-col">
+      <Skeleton className="w-full h-[230px]"/>
+      <div className="flex flex-col mt-2 gap-y-2">
+        <Skeleton className="h-4 w-full" />
+        <Skeleton className="h-6 w-full" />
+      </div>
+      <Skeleton className="h-10 w-full mt-5" />
+    </div>
+  )
 }

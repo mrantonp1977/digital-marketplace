@@ -24,6 +24,7 @@ async function getData(id: string) {
         select: {
           profileImage: true,
           firstName: true,
+          lastName: true,
         },
       },
     }, 
@@ -75,6 +76,12 @@ export default async function ProductPage({params}: {params: {id: string}}) {
             </h3>
             <h3 className="font-semibold text-primary col-span-1">
               {data?.category}
+            </h3>
+            <h3 className="text-lg font-normal text-slate-800 col-span-1">
+              Seller:
+            </h3>
+            <h3 className="font-semibold text-primary col-span-1">
+              {data?.User?.firstName} {data?.User?.lastName}
             </h3>
           </div>
         </div>
