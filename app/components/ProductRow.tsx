@@ -1,8 +1,9 @@
 import Link from 'next/link';
-import { ProductCard } from './ProductCard';
+import { LoadingProductCard, ProductCard } from './ProductCard';
 import prisma from '../lib/db';
 import { notFound } from 'next/navigation';
-
+import { Suspense } from 'react';
+import { Skeleton } from '@/components/ui/skeleton';
 
 interface ProductProps {
   category: 'newest' | 'templates' | 'uikits' | 'icons';
@@ -28,7 +29,7 @@ async function getData({ category }: ProductProps) {
       return {
         data,
         title: 'Icons',
-        link: '/products/icon'
+        link: '/products/icon',
       };
     }
     case 'newest': {
@@ -49,7 +50,7 @@ async function getData({ category }: ProductProps) {
       return {
         data,
         title: 'Newest Products',
-        link: '/products/all'
+        link: '/products/all',
       };
     }
     case 'templates': {
@@ -70,7 +71,7 @@ async function getData({ category }: ProductProps) {
       return {
         data,
         title: 'Templates',
-        link: '/products/template'
+        link: '/products/template',
       };
     }
     case 'uikits': {
@@ -91,7 +92,7 @@ async function getData({ category }: ProductProps) {
       return {
         data,
         title: 'UI Kits',
-        link: '/products/uikit'
+        link: '/products/uikit',
       };
     }
     default: {
@@ -100,17 +101,27 @@ async function getData({ category }: ProductProps) {
   }
 }
 
-export async function ProductRow({ category }: ProductProps) {
-  const data = await getData({ category })
+export function ProductRow({ category }: ProductProps) {
   return (
     <section className="mt-12">
+      <Suspense fallback={<LoadingState />}>
+        <LoadRows category={category} />
+      </Suspense>
+    </section>
+  );
+}
+
+async function LoadRows({ category }: ProductProps) {
+  const data = await getData({ category: category });
+  return (
+    <>
       <div className="md:flex md:items-center md:justify-between">
-        <h2 className="text-lg font-extrabold tracking-tighter text-white mb-10 rounded-lg py-2 px-3 bg-purple-700">
+        <h2 className="text-lg font-extrabold text-white mb-10 rounded-lg py-2 px-3 bg-slate-700">
           {data.title}
         </h2>
         <Link
           href={data.link}
-          className="text-lg hidden font-bold hover:text-white hover:bg-purple-500 md:block text-white mb-10 rounded-lg py-2 px-3 bg-purple-700"
+          className="text-lg hidden font-bold hover:text-white hover:bg-slate-600 md:block text-white mb-10 rounded-lg py-2 px-3 bg-slate-700"
         >
           All Products <span>&rarr;</span>
         </Link>
@@ -127,6 +138,19 @@ export async function ProductRow({ category }: ProductProps) {
           />
         ))}
       </div>
-    </section>
+    </>
   );
+}
+
+function LoadingState() {
+  return (
+    <div>
+      <Skeleton className="h-8 w-56"/>
+      <div className="grid grid-cols-1 sm:grid-cols-2 mt-4 gap-10 lg:grid-cols-3">
+        <LoadingProductCard />
+        <LoadingProductCard />
+        <LoadingProductCard />
+      </div>
+    </div>
+  )
 }

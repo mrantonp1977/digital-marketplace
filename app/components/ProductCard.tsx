@@ -52,9 +52,9 @@ export function ProductCard({
         </h3>
       </div>
       <p className="text-slate-600 line-clamp-1 mt-2">{smallDescription}</p>
-      <Button asChild className="w-full mt-5">
+      <Button asChild className="w-full mt-5 border-2 border-violet-400 bg-white text-violet-600 text-md font-semibold hover:bg-sky-700 hover:text-white">
         <Link href={`/product/${id}`}>
-          Learn More!
+          Learn More...
         </Link>
       </Button>
     </div>
