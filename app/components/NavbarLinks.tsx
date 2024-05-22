@@ -37,9 +37,9 @@ export function NavbarLinks() {
           href={item.href}
           className={cn(
             location === item.href
-              ? 'bg-muted'
+              ? 'bg-slate-300'
               : 'hover:bg-muted hover:bg-opacity-75',
-            'group flex items-center px-2 py-2 font-extrabold text-sky-800 rounded-md'
+            'group flex items-center px-2 py-2 font-extrabold text-violet-800 rounded-md'
           )}
         >
           {item.name}

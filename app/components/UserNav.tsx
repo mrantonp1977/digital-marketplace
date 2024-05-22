@@ -30,7 +30,7 @@ export function UserNav({ email, name, userImage }: iAppProps) {
           </Avatar>
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent className="w-56 " align="end" forceMount>
+      <DropdownMenuContent className="w-56 bg-slate-100" align="end" forceMount>
         <DropdownMenuLabel className="font-bold">
           <div className="flex flex-col space-y-1">
             <p className="text-lg leading-none">{name}</p>
@@ -38,7 +38,7 @@ export function UserNav({ email, name, userImage }: iAppProps) {
           </div>
         </DropdownMenuLabel>
         <DropdownMenuSeparator />
-        <DropdownMenuGroup className="font-semibold text-cyan-800">
+        <DropdownMenuGroup className="font-semibold text-violet-900">
           <DropdownMenuItem asChild>
             <Link href="/sell">Sell your Product</Link>
           </DropdownMenuItem>
@@ -47,7 +47,11 @@ export function UserNav({ email, name, userImage }: iAppProps) {
               Settings
             </Link>
           </DropdownMenuItem>
-          <DropdownMenuItem>item1</DropdownMenuItem>
+          <DropdownMenuItem asChild>
+            <Link href="my-products">
+              My Products
+            </Link>
+          </DropdownMenuItem>
           <DropdownMenuItem>item2</DropdownMenuItem>
         </DropdownMenuGroup>
         <DropdownMenuSeparator />
